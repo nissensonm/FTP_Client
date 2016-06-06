@@ -13,6 +13,8 @@
 #include "interpreter.cpp"
 #include "syst.cpp"
 #include "takeinput.cpp"
+#include "cd.cpp"
+#include "quit.cpp"
 
 //Main is intended to just establish the initial connection
 int main(int argc, char *argv[])
@@ -49,28 +51,9 @@ int main(int argc, char *argv[])
 		return -1; 
 	}
 
-	cout << "ftp> "; //Output similar to how it looks like on the ftp client
-	char command[S_BUFF_SIZE]; //Set up buffer to take user command
-	cin.getline( command, S_BUFF_SIZE ); //Take input                      
+	interpLoop(clientSd, argv); //Enter main interpreter loop.
 	
-	char parseCmd[S_BUFF_SIZE];
-	strncpy(parseCmd,command,2); //First we check if the command was cd or ls
-	cout << "PARSE: " << parseCmd << "!"<< endl;
-	
-	if (parseCmd == "ls")
-	{
-		cout << "Yep, they typed ls" << endl;
-	}
-	if (parseCmd == "cd")
-	{
-		cout << "Typed cd" << endl;
-	}
-	
-	
-	//interpLoop(clientSd, argv);
-
-	
-	close (clientSd); //Close client socket to try and free it sooner
+	close (clientSd); //Close client socket 
 	return 0;
 }
 

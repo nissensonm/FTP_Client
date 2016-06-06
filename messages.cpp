@@ -32,14 +32,12 @@ int getDataFromServer(int clientSd)
 	ufds.events = POLLIN;             // check if sd is ready to read
 	ufds.revents = 0;                 // simply zero-initialized
 	int val = 0;					  // We want the while loop below to run at least once
-	//char buff[BUFF_SIZE];
 	buff = new char[BUFF_SIZE];
 	bool readAtLeastOnce = false;
 	while (val > 0 || readAtLeastOnce == false)
 	{ 
 		val = poll( &ufds, 1, 1000 ); // poll this socket for 1000msec (=1sec)
 		int nread = 0;
-		string test;
 		if ( val > 0 ) // the socket is ready to read
 		{                  
 			readAtLeastOnce = true;
